@@ -1,0 +1,550 @@
+/* =========================================
+   TASK 2 - ADVANCED CSS3 & RESPONSIVE DESIGN
+========================================= */
+
+/* ---------- CSS VARIABLES ---------- */
+
+:root {
+    --bg-color: #0f172a;
+    --surface-color: #1e293b;
+    --card-color: #334155;
+    --text-color: #f8fafc;
+    --muted-text: #cbd5e1;
+    --primary-color: #38bdf8;
+    --border-color: #475569;
+    --focus-color: #facc15;
+
+    --max-width: 1100px;
+    --radius: 12px;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* ---------- LIGHT THEME ---------- */
+
+.light-theme {
+    --bg-color: #f8fafc;
+    --surface-color: #ffffff;
+    --card-color: #e2e8f0;
+    --text-color: #0f172a;
+    --muted-text: #475569;
+    --primary-color: #0284c7;
+    --border-color: #cbd5e1;
+    --focus-color: #ca8a04;
+
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.10);
+}
+
+
+/* ---------- RESET ---------- */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+
+    background: var(--bg-color);
+    color: var(--text-color);
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+/* ---------- SKIP LINK ---------- */
+
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 10px;
+
+    padding: 10px 15px;
+
+    background: var(--text-color);
+    color: var(--bg-color);
+
+    z-index: 1000;
+}
+
+.skip-link:focus {
+    left: 10px;
+}
+
+
+/* =========================================
+   HEADER + FLEXBOX
+========================================= */
+
+header {
+    background: var(--surface-color);
+    border-bottom: 1px solid var(--border-color);
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav {
+    width: min(100% - 2rem, var(--max-width));
+    margin-inline: auto;
+    padding: 1rem 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 1rem;
+}
+
+nav > a {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+nav ul {
+    list-style: none;
+
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+}
+
+nav ul a {
+    color: var(--text-color);
+}
+
+nav ul a:hover {
+    color: var(--primary-color);
+}
+
+
+/* ---------- THEME BUTTON ---------- */
+
+#theme-toggle {
+    padding: 0.6rem 1rem;
+
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+
+    background: var(--primary-color);
+    color: #000;
+
+    font: inherit;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+#theme-toggle:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+
+/* ---------- MAIN ---------- */
+
+main {
+    width: min(100% - 2rem, var(--max-width));
+    margin-inline: auto;
+}
+
+section {
+    padding-block: 4rem;
+}
+
+
+/* =========================================
+   HERO - CSS GRID
+========================================= */
+
+section[aria-labelledby="hero-heading"] {
+    min-height: 80vh;
+
+    display: grid;
+    place-items: center;
+
+    text-align: center;
+}
+
+section[aria-labelledby="hero-heading"] > * {
+    max-width: 800px;
+    margin-inline: auto;
+}
+
+#hero-heading {
+    font-size: clamp(2.2rem, 8vw, 4.5rem);
+    line-height: 1.1;
+}
+
+
+/* ---------- HERO BUTTONS - FLEXBOX ---------- */
+
+section[aria-labelledby="hero-heading"] a {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin: 0.5rem;
+    padding: 0.75rem 1.2rem;
+
+    border-radius: var(--radius);
+
+    background: var(--primary-color);
+    color: #000;
+
+    font-weight: bold;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+section[aria-labelledby="hero-heading"] a:hover {
+    text-decoration: none;
+
+    transform: translateY(-3px);
+
+    box-shadow: var(--shadow);
+}
+
+
+/* =========================================
+   SKILLS - CSS GRID
+========================================= */
+
+section[aria-labelledby="skills-heading"] ul {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 1rem;
+
+    list-style: none;
+    padding: 0;
+}
+
+section[aria-labelledby="skills-heading"] li {
+    padding: 1rem;
+
+    background: var(--surface-color);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: var(--radius);
+
+    text-align: center;
+
+    transition: transform 0.2s ease;
+}
+
+section[aria-labelledby="skills-heading"] li:hover {
+    transform: translateY(-4px);
+}
+
+
+/* =========================================
+   PROJECTS - CSS GRID
+========================================= */
+
+section[aria-labelledby="project-list-heading"] {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 1.5rem;
+}
+
+section[aria-labelledby="project-list-heading"] h2 {
+    grid-column: 1 / -1;
+}
+
+
+/* ---------- PROJECT CARDS ---------- */
+
+article {
+    padding: 1.5rem;
+
+    background: var(--surface-color);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+article:hover {
+    transform: translateY(-5px);
+}
+
+
+/* =========================================
+   CONTACT FORM - CSS GRID
+========================================= */
+
+form {
+    max-width: 700px;
+    margin-inline: auto;
+
+    display: grid;
+    gap: 1rem;
+}
+
+form div {
+    display: grid;
+    gap: 0.5rem;
+}
+
+label {
+    font-weight: bold;
+}
+
+input,
+textarea {
+    width: 100%;
+
+    padding: 0.8rem;
+
+    font: inherit;
+
+    color: var(--text-color);
+
+    background: var(--surface-color);
+
+    border: 2px solid var(--border-color);
+
+    border-radius: 8px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+
+/* ---------- SUBMIT BUTTON ---------- */
+
+button[type="submit"] {
+    width: fit-content;
+
+    padding: 0.8rem 1.5rem;
+
+    font: inherit;
+    font-weight: bold;
+
+    border: none;
+
+    border-radius: var(--radius);
+
+    background: var(--primary-color);
+
+    color: #000;
+
+    cursor: pointer;
+
+    transition: transform 0.2s ease;
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+    margin-top: 3rem;
+
+    padding: 2rem 1rem;
+
+    text-align: center;
+
+    background: var(--surface-color);
+
+    border-top: 1px solid var(--border-color);
+}
+
+
+/* =========================================
+   KEYBOARD ACCESSIBILITY
+========================================= */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--focus-color);
+    outline-offset: 3px;
+}
+
+
+/* =========================================
+   MOBILE-FIRST DESIGN
+========================================= */
+
+@media (max-width: 599px) {
+
+    nav {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    nav ul {
+        justify-content: center;
+        gap: 0.8rem;
+    }
+
+    #theme-toggle {
+        width: auto;
+        min-width: 140px;
+    }
+
+    section {
+        padding-block: 3rem;
+    }
+
+    section[aria-labelledby="hero-heading"] {
+        min-height: 70vh;
+    }
+
+    #hero-heading {
+        font-size: clamp(2rem, 10vw, 3rem);
+    }
+
+    section[aria-labelledby="hero-heading"] a {
+        display: flex;
+        width: 100%;
+        max-width: 280px;
+        margin: 0.5rem auto;
+    }
+
+    section[aria-labelledby="skills-heading"] ul {
+        grid-template-columns: 1fr;
+    }
+
+    section[aria-labelledby="project-list-heading"] {
+        grid-template-columns: 1fr;
+    }
+
+    article {
+        padding: 1.2rem;
+    }
+
+    input,
+    textarea {
+        font-size: 16px;
+    }
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (min-width: 600px) and (max-width: 899px) {
+
+    nav {
+        flex-wrap: wrap;
+    }
+
+    section[aria-labelledby="skills-heading"] ul {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    section[aria-labelledby="project-list-heading"] {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* =========================================
+   DESKTOP
+========================================= */
+
+@media (min-width: 900px) {
+
+    nav {
+        padding-block: 1.2rem;
+    }
+
+    section {
+        padding-block: 6rem;
+    }
+
+    section[aria-labelledby="skills-heading"] ul {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    section[aria-labelledby="project-list-heading"] {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* =========================================
+   LARGE DESKTOP
+========================================= */
+
+@media (min-width: 1200px) {
+
+    main {
+        width: min(100% - 4rem, 1200px);
+    }
+}
+
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+}
